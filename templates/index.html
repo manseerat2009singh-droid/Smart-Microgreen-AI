@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Microgreen AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🌱</div>
+
+            <div>
+                <div class="logo-title">SMART MICROGREEN AI</div>
+                <div class="logo-subtitle">AI-Powered Growth Monitoring</div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#feedback">Feedback</a>
+            <a href="#team">Our Team</a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🌿 CBSE Artificial Intelligence Project
+            </div>
+
+            <h1>
+                Smart Microgreen
+                <span>AI</span>
+            </h1>
+
+            <p>
+                Image-based visual growth monitoring for
+                <strong>Fenugreek Microgreens</strong>
+            </p>
+
+            <p class="hero-description">
+                Transforming plant images into meaningful visual growth
+                insights using Computer Vision and Artificial Intelligence.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#dashboard" class="primary-btn">
+                    Explore Dashboard →
+                </a>
+
+                <a href="#analysis" class="secondary-btn">
+                    Analyse a Box
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="plant-card">
+
+                <div class="plant-glow"></div>
+
+                <div class="plant">🌱</div>
+
+                <div class="scan-line"></div>
+
+                <div class="scan-text">
+                    AI VISUAL ANALYSIS
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+    <section id="dashboard" class="dashboard-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">LIVE DATASET</span>
+
+            <h2>Project Dashboard</h2>
+
+            <p>
+                A quick overview of the experimental microgreen dataset.
+            </p>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📦</div>
+
+                <div>
+                    <h3>{{ boxes }}</h3>
+                    <p>Experimental Boxes</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📅</div>
+
+                <div>
+                    <h3>{{ days }}</h3>
+                    <p>Observation Days</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📊</div>
+
+                <div>
+                    <h3>{{ records }}</h3>
+                    <p>Data Records</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🌿</div>
+
+                <div>
+                    <h3>{{ avg_vgi }}</h3>
+                    <p>Average VGI</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">SYSTEM WORKFLOW</span>
+
+            <h2>How Smart Microgreen AI Works</h2>
+
+            <p>
+                From plant images to meaningful growth insights.
+            </p>
+
+        </div>
+
+
+        <div class="workflow">
+
+            <div class="workflow-card">
+
+                <div class="workflow-number">01</div>
+
+                <div class="workflow-icon">📸</div>
+
+                <h3>Capture</h3>
+
+                <p>
+                    Images are collected from multiple views of each
+                    experimental box.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-arrow">→</div>
+
+
+            <div class="workflow-card">
+
+                <div class="workflow-number">02</div>
+
+                <div class="workflow-icon">🔬</div>
+
+                <h3>Process</h3>
+
+                <p>
+                    OpenCV extracts vegetation-related visual features
+                    from the images.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-arrow">→</div>
+
+
+            <div class="workflow-card">
+
+                <div class="workflow-number">03</div>
+
+                <div class="workflow-icon">🧠</div>
+
+                <h3>Analyse</h3>
+
+                <p>
+                    Visual features are converted into a Visual Growth
+                    Index.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-arrow">→</div>
+
+
+            <div class="workflow-card">
+
+                <div class="workflow-number">04</div>
+
+                <div class="workflow-icon">📈</div>
+
+                <h3>Insights</h3>
+
+                <p>
+                    Growth trends and cultivation-condition relationships
+                    are presented visually.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOX ANALYSIS -->
+    <section id="analysis" class="analysis-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">IMAGE ANALYSIS</span>
+
+            <h2>Analyse Your Microgreen Box</h2>
+
+            <p>
+                Select any experimental box to view its latest visual
+                growth assessment.
+            </p>
+
+        </div>
+
+
+        <div class="analysis-container">
+
+            <div class="box-selector">
+
+                <label for="boxNumber">
+                    Select Box Number
+                </label>
+
+                <div class="input-row">
+
+                    <input
+                        type="number"
+                        id="boxNumber"
+                        min="1"
+                        max="22"
+                        value="1"
+                    >
+
+                    <button onclick="analyseBox()">
+                        ANALYSE BOX
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="analysisResult" class="analysis-result">
+
+                <div class="result-placeholder">
+
+                    <div class="big-leaf">🌱</div>
+
+                    <h3>Ready for Analysis</h3>
+
+                    <p>
+                        Enter a box number and click
+                        <strong>Analyse Box</strong>.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TREND SECTION -->
+    <section class="visual-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">VISUAL INSIGHTS</span>
+
+            <h2>Growth Monitoring</h2>
+
+            <p>
+                Explore how the Visual Growth Index changes across
+                observation days.
+            </p>
+
+        </div>
+
+
+        <div class="visual-grid">
+
+            <div class="visual-card">
+
+                <div class="visual-card-header">
+
+                    <div>
+                        <span class="mini-label">TREND</span>
+                        <h3>Average Growth Across Days</h3>
+                    </div>
+
+                    <span class="chart-icon">📈</span>
+
+                </div>
+
+                <canvas id="trendChart"></canvas>
+
+            </div>
+
+
+            <div class="visual-card">
+
+                <div class="visual-card-header">
+
+                    <div>
+                        <span class="mini-label">COMPARISON</span>
+                        <h3>Latest VGI by Box</h3>
+                    </div>
+
+                    <span class="chart-icon">📊</span>
+
+                </div>
+
+                <canvas id="comparisonChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LIVE CAMERA -->
+    <section class="camera-section">
+
+        <div class="camera-content">
+
+            <span class="section-tag">REAL-TIME AI</span>
+
+            <h2>Live Microgreen Analysis</h2>
+
+            <p>
+                Use your webcam to visually assess vegetation coverage
+                in real time.
+            </p>
+
+            <button class="primary-btn" onclick="startCamera()">
+                📷 Start Camera
+            </button>
+
+            <button class="secondary-btn" onclick="analyseCamera()">
+                🔍 Analyse Frame
+            </button>
+
+        </div>
+
+
+        <div class="camera-box">
+
+            <video id="camera" autoplay playsinline></video>
+
+            <canvas id="cameraCanvas"></canvas>
+
+            <div id="cameraStatus">
+                Camera not started
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEEDBACK -->
+    <section id="feedback" class="feedback-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">YOUR OPINION</span>
+
+            <h2>Project Feedback</h2>
+
+            <p>
+                Help us improve Smart Microgreen AI.
+            </p>
+
+        </div>
+
+
+        <div class="feedback-container">
+
+            <form id="feedbackForm">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Your Name</label>
+
+                        <input
+                            type="text"
+                            id="feedbackName"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Rating</label>
+
+                        <select id="feedbackRating" required>
+
+                            <option value="">Select rating</option>
+                            <option value="5">★★★★★ Excellent</option>
+                            <option value="4">★★★★ Very Good</option>
+                            <option value="3">★★★ Good</option>
+                            <option value="2">★★ Needs Improvement</option>
+                            <option value="1">★ Poor</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Your Feedback</label>
+
+                    <textarea
+                        id="feedbackMessage"
+                        rows="5"
+                        placeholder="Tell us what you think..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button type="submit" class="primary-btn">
+                    Submit Feedback →
+                </button>
+
+                <div id="feedbackStatus"></div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- TEAM -->
+    <section id="team" class="team-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">THE TEAM</span>
+
+            <h2>Meet Our Team</h2>
+
+            <p>
+                The people behind Smart Microgreen AI.
+            </p>
+
+        </div>
+
+
+        <div class="team-grid">
+
+            <div class="team-card">
+
+                <div class="team-avatar">👨‍💻</div>
+
+                <h3>Team Member 1</h3>
+
+                <span>Project Lead</span>
+
+                <p>
+                    AI research, project development and presentation.
+                </p>
+
+            </div>
+
+
+            <div class="team-card">
+
+                <div class="team-avatar">🔬</div>
+
+                <h3>Team Member 2</h3>
+
+                <span>Research & Data</span>
+
+                <p>
+                    Experimental data collection and analysis.
+                </p>
+
+            </div>
+
+
+            <div class="team-card">
+
+                <div class="team-avatar">🎨</div>
+
+                <h3>Team Member 3</h3>
+
+                <span>UI & Design</span>
+
+                <p>
+                    Website design and user experience.
+                </p>
+
+            </div>
+
+
+            <div class="team-card">
+
+                <div class="team-avatar">📊</div>
+
+                <h3>Team Member 4</h3>
+
+                <span>Documentation</span>
+
+                <p>
+                    Documentation, testing and project presentation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about-section">
+
+        <div class="about-card">
+
+            <span class="section-tag">ABOUT THE PROJECT</span>
+
+            <h2>Making Plant Growth Measurable</h2>
+
+            <p>
+                Smart Microgreen AI uses computer vision to extract
+                vegetation-related features from fenugreek microgreen
+                images. These features are combined into a Visual Growth
+                Index that allows experimental boxes to be monitored and
+                compared across observation days.
+            </p>
+
+            <div class="about-tags">
+
+                <span>Computer Vision</span>
+                <span>OpenCV</span>
+                <span>Python</span>
+                <span>Data Analysis</span>
+                <span>AI</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            🌱 SMART MICROGREEN AI
+        </div>
+
+        <p>
+            CBSE Artificial Intelligence Project • Fenugreek Microgreens
+        </p>
+
+        <p class="footer-small">
+            Image-Based Visual Growth Monitoring System
+        </p>
+
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

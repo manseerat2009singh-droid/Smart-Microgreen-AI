@@ -1,0 +1,6 @@
+.venv/
+data/
+images/
+__pycache__/
+*.HEIC
+*.heic
