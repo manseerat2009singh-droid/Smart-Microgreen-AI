@@ -150,98 +150,172 @@ async function loadTrendChart() {
         }
 
 
-        trendChart = new Chart(ctx, {
+    trendChart = new Chart(ctx, {
 
-            type: "line",
+    type: "line",
 
-            data: {
+    data: {
 
-                labels: labels,
+        labels: labels,
 
-                datasets: [
+        datasets: [
 
-                    {
-                        label: "Average Visual Growth Index",
+            {
+                label: "Average Visual Growth Index",
 
-                        data: values,
+                data: values,
 
-                        borderColor: "#58e88b",
+                borderColor: "#62e18b",
 
-                        backgroundColor: "rgba(88,232,139,0.10)",
+                backgroundColor: (context) => {
 
-                        borderWidth: 3,
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
 
-                        pointBackgroundColor: "#58e88b",
-
-                        pointBorderColor: "#07130e",
-
-                        pointBorderWidth: 3,
-
-                        pointRadius: 5,
-
-                        tension: 0.35,
-
-                        fill: true
+                    if (!chartArea) {
+                        return "rgba(98,225,139,0.10)";
                     }
 
-                ]
-            },
+                    const gradient = ctx.createLinearGradient(
+                        0,
+                        chartArea.top,
+                        0,
+                        chartArea.bottom
+                    );
 
+                    gradient.addColorStop(0, "rgba(98,225,139,0.24)");
+                    gradient.addColorStop(1, "rgba(98,225,139,0.01)");
 
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                plugins: {
-
-                    legend: {
-                        labels: {
-                            color: "#9bb4a5"
-                        }
-                    }
-
+                    return gradient;
                 },
 
+                borderWidth: 3,
 
-                scales: {
+                pointBackgroundColor: "#62e18b",
 
-                    x: {
+                pointBorderColor: "#07130e",
 
-                        ticks: {
-                            color: "#789284"
-                        },
+                pointBorderWidth: 3,
 
-                        grid: {
-                            color: "rgba(255,255,255,0.04)"
-                        }
+                pointRadius: 5,
 
-                    },
+                pointHoverRadius: 8,
 
+                pointHoverBackgroundColor: "#ffffff",
 
-                    y: {
+                pointHoverBorderColor: "#62e18b",
 
-                        min: 0,
+                pointHoverBorderWidth: 3,
 
-                        max: 100,
+                tension: 0.42,
 
-                        ticks: {
-                            color: "#789284"
-                        },
-
-                        grid: {
-                            color: "rgba(255,255,255,0.04)"
-                        }
-
-                    }
-
-                }
-
+                fill: true
             }
 
-        });
+        ]
+    },
 
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        interaction: {
+            intersect: false,
+            mode: "index"
+        },
+
+        animation: {
+            duration: 1200,
+            easing: "easeOutQuart"
+        },
+
+        plugins: {
+
+            legend: {
+                display: true,
+
+                labels: {
+                    color: "#b8cdbf",
+                    padding: 18,
+                    usePointStyle: true,
+                    pointStyle: "circle",
+                    font: {
+                        size: 11,
+                        weight: "600"
+                    }
+                }
+            },
+
+            tooltip: {
+
+                backgroundColor: "rgba(5,14,9,0.96)",
+
+                titleColor: "#62e18b",
+
+                bodyColor: "#e5f4e9",
+
+                borderColor: "rgba(98,225,139,0.35)",
+
+                borderWidth: 1,
+
+                padding: 12,
+
+                displayColors: false,
+
+                callbacks: {
+                    label: function(context) {
+                        return "VGI: " + Number(context.raw).toFixed(2);
+                    }
+                }
+            }
+
+        },
+
+        scales: {
+
+            x: {
+
+                ticks: {
+                    color: "#8da698",
+                    padding: 8,
+                    font: {
+                        size: 10
+                    }
+                },
+
+                grid: {
+                    color: "rgba(255,255,255,0.025)",
+                    drawBorder: false
+                }
+            },
+
+            y: {
+
+                min: 0,
+
+                max: 100,
+
+                ticks: {
+                    color: "#8da698",
+                    padding: 8,
+                    stepSize: 20,
+                    font: {
+                        size: 10
+                    }
+                },
+
+                grid: {
+                    color: "rgba(98,225,139,0.055)",
+                    drawBorder: false
+                }
+            }
+
+        }
+    }
+
+});
     }
 
     catch (error) {

@@ -507,43 +507,46 @@
     </section>
 
 
+    
     <!-- TEAM -->
-    <section id="team" class="team-section">
 
-        <div class="section-heading">
+<section id="team" class="team-section">
 
-            <span class="section-tag">THE TEAM</span>
+```
+<div class="section-heading">
 
-            <h2>Meet Our Team</h2>
+    <span class="section-tag">THE TEAM</span>
 
-            <p>
-                The people behind Smart Microgreen AI.
-            </p>
+    <h2>Meet Our Team</h2>
 
-        </div>
+    <p>
+        The people behind Smart Microgreen AI.
+    </p>
 
+</div>
 
-        <div class="team-grid">
+<div class="team-grid">
 
     <div class="team-card">
-        <div class="team-avatar">👨‍💼</div>
+        <img src="{{ url_for('static', filename='team/parth.png') }}"
+             alt="Parth Negi"
+             class="team-photo">
 
         <h3>Parth Negi</h3>
-
-        <span>Project Lead</span>
+        <span>Project Lead & Video Editor</span>
 
         <p>
-            Leading the project, coordinating the team
-            and overseeing overall development.
+            Leading the project, coordinating the team, overseeing development, and editing project videos.
         </p>
     </div>
 
 
     <div class="team-card">
-        <div class="team-avatar">💻</div>
+        <img src="{{ url_for('static', filename='team/manseerat.jpeg') }}"
+             alt="Manseerat Singh"
+             class="team-photo">
 
         <h3>Manseerat Singh</h3>
-
         <span>Coder &amp; Web Developer</span>
 
         <p>
@@ -554,10 +557,11 @@
 
 
     <div class="team-card">
-        <div class="team-avatar">🔬</div>
+        <img src="{{ url_for('static', filename='team/shruti.jpeg') }}"
+             alt="Shruti Jha"
+             class="team-photo">
 
         <h3>Shruti Jha</h3>
-
         <span>Data Collector</span>
 
         <p>
@@ -568,10 +572,11 @@
 
 
     <div class="team-card">
-        <div class="team-avatar">📋</div>
+        <img src="{{ url_for('static', filename='team/siddhi.png') }}"
+             alt="Siddhi Aggarwal"
+             class="team-photo">
 
         <h3>Siddhi Aggarwal</h3>
-
         <span>Project Records Coordinator</span>
 
         <p>
@@ -582,21 +587,23 @@
 
 
     <div class="team-card">
-        <div class="team-avatar">🎬</div>
+        <img src="{{ url_for('static', filename='team/bittu.jpeg') }}"
+             alt="Bittu Kumar"
+             class="team-photo">
 
         <h3>Bittu Kumar</h3>
-
-        <span>Video Editor</span>
+        <span>Tester</span>
 
         <p>
-            Editing project videos and creating
-            visual content for the presentation.
+            Testing the project, checking functionality, identifying issues, and helping ensure the system works correctly..
         </p>
     </div>
 
 </div>
+```
 
-    </section>
+</section>
+
 
 
     <!-- ABOUT -->
