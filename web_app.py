@@ -37,6 +37,30 @@ def home():
         avg_vgi=round(float(df["visual_growth_index"].mean()), 2)
     )
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template(
+        "dashboard.html",
+        boxes=int(df["box_id"].nunique()),
+        days=int(df["day"].nunique()),
+        records=len(df),
+        avg_vgi=round(float(df["visual_growth_index"].mean()), 2)
+    )
+
+
+@app.route("/analysis")
+def analysis():
+    return render_template("analysis.html")
+
+
+@app.route("/feedback")
+def feedback_page():
+    return render_template("feedback.html")
+
+
+@app.route("/team")
+def team():
+    return render_template("team.html")
 
 @app.route("/api/box/<int:box_id>")
 def box_analysis(box_id):
@@ -56,6 +80,24 @@ def box_analysis(box_id):
         "exg": round(float(latest["top_exg_mean"]), 2)
     })
 
+@app.route("/api/box/<int:box_id>/trend")
+def box_trend(box_id):
+
+    box_data = (
+        df[df["box_id"] == box_id]
+        .sort_values("day")
+    )
+
+    if box_data.empty:
+        return jsonify({"error": "Box not found"}), 404
+
+    return jsonify([
+        {
+            "day": int(row["day"]),
+            "vgi": round(float(row["visual_growth_index"]), 2)
+        }
+        for _, row in box_data.iterrows()
+    ])
 
 @app.route("/api/trend")
 def trend():

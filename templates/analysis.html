@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analysis • Smart Microgreen AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🌱</div>
+
+            <div>
+                <div class="logo-title">SMART MICROGREEN AI</div>
+                <div class="logo-subtitle">AI-Powered Growth Monitoring</div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/analysis">Analysis</a>
+            <a href="/feedback">Feedback</a>
+            <a href="/team">Our Team</a>
+        </div>
+
+    </nav>
+
+
+    <!-- BOX ANALYSIS -->
+    <section id="analysis" class="analysis-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">IMAGE ANALYSIS</span>
+
+            <h2>Analyse Your Microgreen Box</h2>
+
+            <p>
+                Select any experimental box to view its latest visual
+                growth assessment.
+            </p>
+
+        </div>
+
+
+        <div class="analysis-container">
+
+            <div class="box-selector">
+
+                <label for="boxNumber">
+                    Select Box Number
+                </label>
+
+                <div class="input-row">
+
+                    <input
+                        type="number"
+                        id="boxNumber"
+                        min="1"
+                        max="22"
+                        value="1"
+                    >
+
+                    <button onclick="analyseBox()">
+                        ANALYSE BOX
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="analysisResult" class="analysis-result">
+
+                <div class="result-placeholder">
+
+                    <div class="big-leaf">🌱</div>
+
+                    <h3>Ready for Analysis</h3>
+
+                    <p>
+                        Enter a box number and click
+                        <strong>Analyse Box</strong>.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="analysis-timeline">
+    <span class="timeline-label">MONITORING TIMELINE</span>
+
+    <div class="timeline-track">
+        <span>DAY 1</span>
+        <i></i>
+        <span>DAY 3</span>
+        <i></i>
+        <span>DAY 5</span>
+        <i></i>
+        <span>DAY 7</span>
+        <i></i>
+        <span>DAY 9</span>
+    </div>
+
+    <p>Continuous visual monitoring across the observation period.</p>
+</div>
+
+
+    <!-- LIVE CAMERA -->
+    <section class="camera-section">
+
+        <div class="camera-content">
+
+            <span class="section-tag">REAL-TIME AI</span>
+
+            <h2>Live Microgreen Analysis</h2>
+
+            <p>
+                Use your webcam to visually assess vegetation coverage
+                in real time.
+            </p>
+
+            <button class="primary-btn" onclick="startCamera()">
+                📷 Start Camera
+            </button>
+
+            <button class="secondary-btn" onclick="analyseCamera()">
+                🔍 Analyse Frame
+            </button>
+
+        </div>
+
+
+        <div class="camera-box">
+
+            <video id="camera" autoplay playsinline></video>
+
+            <canvas id="cameraCanvas"></canvas>
+
+            <div id="cameraStatus">
+                Camera not started
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            🌱 SMART MICROGREEN AI
+        </div>
+
+        <p>
+            CBSE Artificial Intelligence Project • Fenugreek Microgreens
+        </p>
+
+        <p class="footer-small">
+            Image-Based Visual Growth Monitoring System
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

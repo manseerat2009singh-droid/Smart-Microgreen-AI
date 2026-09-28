@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard • Smart Microgreen AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🌱</div>
+
+            <div>
+                <div class="logo-title">SMART MICROGREEN AI</div>
+                <div class="logo-subtitle">AI-Powered Growth Monitoring</div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/analysis">Analysis</a>
+            <a href="/feedback">Feedback</a>
+            <a href="/team">Our Team</a>
+        </div>
+
+    </nav>
+
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="dashboard-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">LIVE DATASET</span>
+
+            <h2>Project Dashboard</h2>
+
+            <p>
+                A quick overview of the experimental microgreen dataset.
+            </p>
+
+        </div>
+
+        <div class="project-snapshot">
+    <div>
+        <span class="snapshot-label">PROJECT SNAPSHOT</span>
+        <h3>Computer Vision Growth Monitoring</h3>
+        <p>Image-based analysis of fenugreek microgreens across controlled cultivation conditions.</p>
+    </div>
+
+    <div class="snapshot-tech">
+        <span>OPENCV</span>
+        <span>VGI</span>
+        <span>9 DAYS</span>
+    </div>
+</div>
+
+
+        <div class="system-status">
+    <span class="status-live">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE
+    </span>
+
+    <span>IMAGE ENGINE READY</span>
+    <span>22 BOXES</span>
+    <span>9 OBSERVATION DAYS</span>
+    <span>194 RECORDS</span>
+</div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📦</div>
+
+                <div>
+                    <h3>{{ boxes }}</h3>
+                    <p>Experimental Boxes</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📅</div>
+
+                <div>
+                    <h3>{{ days }}</h3>
+                    <p>Observation Days</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📊</div>
+
+                <div>
+                    <h3>{{ records }}</h3>
+                    <p>Data Records</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🌿</div>
+
+                <div>
+                    <h3>{{ avg_vgi }}</h3>
+                    <p>Average VGI</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GROWTH MONITORING -->
+    <section class="visual-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">VISUAL INSIGHTS</span>
+
+            <h2>Growth Monitoring</h2>
+
+            <p>
+                Explore how the Visual Growth Index changes across
+                observation days.
+            </p>
+
+        </div>
+
+
+        <div class="visual-grid">
+
+            <div class="visual-card">
+
+                <div class="visual-card-header">
+
+                    <div>
+                        <span class="mini-label">TREND</span>
+                        <h3>Average Growth Across Days</h3>
+                    </div>
+
+                    <span class="chart-icon">📈</span>
+
+                </div>
+
+                <canvas id="trendChart"></canvas>
+
+            </div>
+
+
+            <div class="visual-card">
+
+                <div class="visual-card-header">
+
+                    <div>
+                        <span class="mini-label">COMPARISON</span>
+                        <h3>Latest VGI by Box</h3>
+                    </div>
+
+                    <span class="chart-icon">📊</span>
+
+                </div>
+
+                <canvas id="comparisonChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            🌱 SMART MICROGREEN AI
+        </div>
+
+        <p>
+            CBSE Artificial Intelligence Project • Fenugreek Microgreens
+        </p>
+
+        <p class="footer-small">
+            Image-Based Visual Growth Monitoring System
+        </p>
+
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

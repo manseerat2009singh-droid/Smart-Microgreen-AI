@@ -81,13 +81,83 @@ async function analyseBox() {
                     <small>VISUAL GROWTH INDEX</small>
                     <strong>${data.vgi}</strong>
                 </div>
+                 
+            <div class="vgi-ring" style="--vgi: ${data.vgi};">
+    <div class="vgi-ring-inner">
+        <strong>${data.vgi}</strong>
+        <span>VGI</span>
+    </div>
+</div>
+                
 
-                <div class="result-card">
-                    <small>GROWTH CATEGORY</small>
-                    <strong>${growthCategory}</strong>
-                </div>
+<div class="result-card status-card">
+    <small>GROWTH CATEGORY</small>
+
+    <strong class="growth-status ${growthCategory
+        .toLowerCase()
+        .replace(" ", "-")}">
+        ${growthCategory}
+    </strong>
+</div>
 
             </div>
+
+            <div class="feature-panel">
+
+    <div class="feature-panel-title">
+        <span>VISUAL DIAGNOSTICS</span>
+        <small>IMAGE-DERIVED SIGNALS</small>
+    </div>
+
+    <div class="feature-bars">
+
+        <div class="feature-item">
+            <div class="feature-label">
+                <span>TOP GREEN COVERAGE</span>
+                <strong>${data.green}%</strong>
+            </div>
+
+            <div class="feature-track">
+                <div class="feature-fill"
+                     style="width:${Math.min(data.green, 100)}%;">
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-label">
+                <span>VEGETATION SIGNAL</span>
+                <strong>${data.exg}</strong>
+            </div>
+
+            <div class="feature-track">
+                <div class="feature-fill"
+                     style="width:${Math.min(Math.max(data.exg * 2, 0), 100)}%;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="box-growth-timeline">
+
+    <div class="timeline-header">
+        <div>
+            <span>BOX GROWTH HISTORY</span>
+            <small>DAY-WISE VISUAL GROWTH INDEX</small>
+        </div>
+        <strong>9 DAYS</strong>
+    </div>
+
+    <div id="boxTimeline" class="timeline-points">
+        <div class="timeline-loading">
+            Loading growth history...
+        </div>
+    </div>
+
+</div>
 
             <div class="result-grid" style="margin-top:14px;">
 
@@ -103,6 +173,21 @@ async function analyseBox() {
 
             </div>
         `;
+                const trendResponse = await fetch(`/api/box/${box}/trend`);
+        const trendData = await trendResponse.json();
+
+        const timeline = document.getElementById("boxTimeline");
+
+       if (timeline && Array.isArray(trendData)) {
+
+    timeline.innerHTML = trendData.map(item => `
+        <div class="timeline-point">
+            <span>DAY ${item.day}</span>
+            <strong>${item.vgi}</strong>
+        </div>
+    `).join("");
+
+}
 
     }
     catch (error) {
@@ -675,7 +760,7 @@ const feedbackForm =
     document.getElementById("feedbackForm");
 
 
-feedbackForm.addEventListener(
+feedbackForm?.addEventListener(
     "submit",
     async function(event) {
 

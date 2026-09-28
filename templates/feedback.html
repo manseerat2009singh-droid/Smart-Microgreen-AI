@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Feedback • Smart Microgreen AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🌱</div>
+
+            <div>
+                <div class="logo-title">SMART MICROGREEN AI</div>
+                <div class="logo-subtitle">AI-Powered Growth Monitoring</div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/analysis">Analysis</a>
+            <a href="/feedback">Feedback</a>
+            <a href="/team">Our Team</a>
+        </div>
+
+    </nav>
+
+
+    <!-- FEEDBACK -->
+    <section id="feedback" class="feedback-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">YOUR OPINION</span>
+
+            <h2>Project Feedback</h2>
+
+            <p>
+                Help us improve Smart Microgreen AI.
+            </p>
+
+        </div>
+
+
+        <div class="feedback-container">
+
+            <form id="feedbackForm">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Your Name</label>
+
+                        <input
+                            type="text"
+                            id="feedbackName"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Rating</label>
+
+                        <select id="feedbackRating" required>
+
+                            <option value="">Select rating</option>
+                            <option value="5">★★★★★ Excellent</option>
+                            <option value="4">★★★★ Very Good</option>
+                            <option value="3">★★★ Good</option>
+                            <option value="2">★★ Needs Improvement</option>
+                            <option value="1">★ Poor</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Your Feedback</label>
+
+                    <textarea
+                        id="feedbackMessage"
+                        rows="5"
+                        placeholder="Tell us what you think..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button type="submit" class="primary-btn">
+                    Submit Feedback →
+                </button>
+
+                <div id="feedbackStatus"></div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            🌱 SMART MICROGREEN AI
+        </div>
+
+        <p>
+            CBSE Artificial Intelligence Project • Fenugreek Microgreens
+        </p>
+
+        <p class="footer-small">
+            Image-Based Visual Growth Monitoring System
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
