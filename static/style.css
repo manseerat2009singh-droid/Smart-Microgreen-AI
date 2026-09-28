@@ -4553,3 +4553,35 @@ box-shadow:
 .timeline-point:hover {
     transform: translateY(-5px) scale(1.02);
 }
+
+/* ===== MOBILE NAVBAR FIX ===== */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-wrap: wrap;
+        height: auto !important;
+        padding: 14px 16px !important;
+        gap: 10px;
+    }
+
+    .nav-links {
+        display: flex !important;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 18px;
+        padding: 7px 2px 4px;
+        scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        font-size: 11px !important;
+    }
+}
