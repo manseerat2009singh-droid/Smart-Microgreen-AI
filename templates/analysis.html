@@ -180,6 +180,107 @@
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 
+    <!-- SCRIPT LOAD CHECK -->
+
+    <!-- ===== BOX INTELLIGENCE ===== -->
+
+<section class="box-intelligence-section">
+
+    <div class="section-heading">
+        <span>BOX INTELLIGENCE</span>
+        <h2>Deep Dive Into Any Box</h2>
+        <p>
+            Explore day-wise visual growth, image-derived signals,
+            and the cultivation conditions associated with each experimental box.
+        </p>
+    </div>
+
+    <div class="box-intelligence-console">
+
+        <div class="box-intel-header">
+            <div>
+                <span>EXPERIMENTAL BOX PROFILE</span>
+                <small>SELECT A BOX TO LOAD ITS COMPLETE VISUAL HISTORY</small>
+            </div>
+
+            <div class="box-selector">
+                <label for="profileBoxNumber">BOX</label>
+                <input
+                    type="number"
+                    id="profileBoxNumber"
+                    min="1"
+                    max="22"
+                    value="1"
+                >
+                <button onclick="loadBoxProfile()">
+                    LOAD PROFILE
+                </button>
+            </div>
+        </div>
+
+        <div id="boxProfileResult">
+
+            <div class="box-intel-placeholder">
+                <div class="intel-icon">⌬</div>
+                <h3>BOX PROFILE READY</h3>
+                <p>
+                    Select an experimental box to inspect its complete
+                    growth journey and cultivation conditions.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="experiment-lab">
+
+    <div class="lab-header">
+        <div>
+            <span>EXPERIMENT LAB</span>
+            <h2>MICROGREEN DIGITAL TWIN</h2>
+            <p>Interactive reconstruction of the 22-box growth experiment.</p>
+        </div>
+
+        <button onclick="startExperimentReplay()" class="replay-btn">
+            ▶ REPLAY EXPERIMENT
+        </button>
+    </div>
+
+    <div class="lab-stage">
+
+        <div class="lab-grid" id="labGrid"></div>
+
+        <div class="lab-info" id="labInfo">
+            <span>SELECT A BOX</span>
+            <h3>22 EXPERIMENTAL BOXES</h3>
+            <p>
+                Click any box to inspect its visual growth journey.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="replay-panel">
+
+        <div class="replay-top">
+            <span id="replayDay">DAY 1</span>
+            <strong id="replayVgi">VGI — --</strong>
+        </div>
+
+        <div class="replay-track">
+            <div id="replayProgress"></div>
+        </div>
+
+        <div class="replay-status" id="replayStatus">
+            SYSTEM READY • AWAITING EXPERIMENT REPLAY
+        </div>
+
+    </div>
+
+</section>
 </body>
 
 </html>

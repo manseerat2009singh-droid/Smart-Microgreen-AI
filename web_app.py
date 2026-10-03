@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_file
 from pathlib import Path
 import pandas as pd
 import csv
@@ -99,6 +99,88 @@ def box_trend(box_id):
         for _, row in box_data.iterrows()
     ])
 
+@app.route("/api/box/<int:box_id>/profile")
+def box_profile(box_id):
+
+    box_data = (
+        df[df["box_id"] == box_id]
+        .sort_values("day")
+    )
+
+    if box_data.empty:
+        return jsonify({"error": "Box not found"}), 404
+
+    latest = box_data.iloc[-1]
+
+    condition_columns = [
+        "seed_density",
+        "seed_soaking_time",
+        "biofertilizer",
+        "cocopeat",
+        "harvest_time",
+        "blackout_duration",
+        "nutrient_ec",
+        "nutrient_spray_start_day",
+        "media_thickness",
+        "seaweed"
+    ]
+
+    conditions = {
+        col: clean_value(latest[col])
+        for col in condition_columns
+        if col in box_data.columns
+    }
+
+    history = [
+        {
+            "day": int(row["day"]),
+            "vgi": round(float(row["visual_growth_index"]), 2),
+            "green": round(float(row["top_green_pct"]), 2),
+            "exg": round(float(row["top_exg_mean"]), 2)
+        }
+        for _, row in box_data.iterrows()
+    ]
+
+    first_vgi = history[0]["vgi"]
+    latest_vgi = history[-1]["vgi"]
+
+    return jsonify({
+        "box_id": box_id,
+        "latest_day": int(latest["day"]),
+        "vgi": latest_vgi,
+        "green": round(float(latest["top_green_pct"]), 2),
+        "exg": round(float(latest["top_exg_mean"]), 2),
+        "change_from_first": round(latest_vgi - first_vgi, 2),
+        "conditions": conditions,
+        "history": history
+    })
+
+@app.route("/api/box/<int:box_id>/images/<int:day>")
+def box_images(box_id, day):
+
+    image_dir = ROOT / "data" / f"Day {day}"
+
+    if not image_dir.exists():
+        return jsonify({"error": "Day images not found"}), 404
+
+    images = []
+
+    for view in range(1, 6):
+
+        image_path = image_dir / f"{box_id}.{view}.jpg"
+
+        if image_path.exists():
+            images.append({
+                "view": view,
+                "url": f"/data/Day%20{day}/{box_id}.{view}.jpg"
+            })
+
+    return jsonify({
+        "box_id": box_id,
+        "day": day,
+        "images": images
+    })
+
 @app.route("/api/trend")
 def trend():
 
@@ -160,6 +242,47 @@ def feedback():
         ])
 
     return jsonify({"success": True})
+
+
+@app.route("/api/image/<int:day>/<int:box_id>/<int:view>")
+def serve_image(day, box_id, view):
+
+    image_dir = ROOT / "data" / f"Day {day}"
+
+    matches = list(image_dir.glob(f"{box_id}.{view}.*"))
+
+    if not matches:
+        return jsonify({"error": "Image not found"}), 404
+
+    image_path = matches[0]
+
+    if image_path.suffix.lower() in [".jpg", ".jpeg", ".png", ".webp"]:
+        return send_file(image_path)
+
+    if image_path.suffix.lower() in [".heic", ".heif"]:
+
+        import io
+        from PIL import Image
+        import pillow_heif
+
+        heif = pillow_heif.read_heif(str(image_path))
+
+        image = Image.frombytes(
+            heif.mode,
+            heif.size,
+            heif.data
+        )
+
+        output = io.BytesIO()
+        image.save(output, format="JPEG", quality=90)
+        output.seek(0)
+
+        return send_file(
+            output,
+            mimetype="image/jpeg"
+        )
+
+    return jsonify({"error": "Unsupported image format"}), 415
 
 
 if __name__ == "__main__":

@@ -114,10 +114,70 @@
 
             </form>
 
+            <!-- FEEDBACK EXPERIENCE ADDON -->
+<div class="feedback-live-panel">
+
+    <div class="flp-header">
+        <div>
+            <span>LIVE EXPERIENCE</span>
+            <h3>How was your experience?</h3>
+        </div>
+
+        <div class="flp-score">
+            <strong id="flpScore">—</strong>
+            <small>/ 5</small>
+        </div>
+    </div>
+
+    <div class="flp-stars" id="flpStars">
+        <button type="button" data-rating="1">★</button>
+        <button type="button" data-rating="2">★</button>
+        <button type="button" data-rating="3">★</button>
+        <button type="button" data-rating="4">★</button>
+        <button type="button" data-rating="5">★</button>
+    </div>
+
+    <div class="flp-meter">
+        <div id="flpMeter"></div>
+    </div>
+
+    <div class="flp-status" id="flpStatus">
+        SELECT A RATING TO BEGIN
+    </div>
+
+</div>
+
         </div>
 
     </section>
 
+<!-- FEEDBACK WALL ADDON -->
+<section class="feedback-wall">
+
+    <div class="feedback-wall-header">
+        <div>
+            <span class="section-tag">COMMUNITY VOICE</span>
+            <h2>What People Think</h2>
+            <p>Real feedback from people exploring Smart Microgreen AI.</p>
+        </div>
+
+        <div class="feedback-wall-stat">
+            <strong id="feedbackCount">0</strong>
+            <span>RESPONSES</span>
+        </div>
+    </div>
+
+    <div id="feedbackWallGrid" class="feedback-wall-grid">
+
+        <div class="feedback-empty">
+            <span>FEEDBACK DATABASE</span>
+            <h3>Loading responses...</h3>
+            <p>Fetching submitted feedback.</p>
+        </div>
+
+    </div>
+
+</section>
 
     <!-- FOOTER -->
     <footer>
@@ -133,6 +193,86 @@
         <p class="footer-small">
             Image-Based Visual Growth Monitoring System
         </p>
+
+        <!-- FEEDBACK INTELLIGENCE CONSOLE -->
+<section class="fic-section">
+
+    <div class="fic-heading">
+        <div>
+            <span>FEEDBACK INTELLIGENCE</span>
+            <h2>Response Signal</h2>
+            <p>Your feedback is analysed before submission.</p>
+        </div>
+
+        <div class="fic-live">
+            <i></i> LIVE
+        </div>
+    </div>
+
+    <div class="fic-grid">
+
+        <div class="fic-main">
+
+            <div class="fic-message-head">
+                <span>MESSAGE ANALYSIS</span>
+                <strong id="ficCharCount">0 / 500</strong>
+            </div>
+
+            <div class="fic-textbox">
+                <div class="fic-scan-line"></div>
+                <p id="ficMessagePreview">
+                    Start typing your feedback...
+                </p>
+            </div>
+
+            <div class="fic-meter">
+                <div id="ficMessageMeter"></div>
+            </div>
+
+            <div class="fic-status" id="ficMessageStatus">
+                WAITING FOR INPUT
+            </div>
+
+        </div>
+
+        <div class="fic-side">
+
+            <div class="fic-signal">
+                <span>RATING SIGNAL</span>
+
+                <div class="fic-rating-number">
+                    <strong id="ficRatingValue">—</strong>
+                    <small>/ 5</small>
+                </div>
+
+                <div class="fic-rating-track">
+                    <div id="ficRatingBar"></div>
+                </div>
+
+                <p id="ficRatingText">
+                    No rating selected
+                </p>
+            </div>
+
+            <div class="fic-readiness">
+                <span>SUBMISSION STATUS</span>
+
+                <strong id="ficReadyText">
+                    INCOMPLETE
+                </strong>
+
+                <div class="fic-checks">
+                    <div id="ficCheckName">○ NAME</div>
+                    <div id="ficCheckRating">○ RATING</div>
+                    <div id="ficCheckMessage">○ MESSAGE</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
     </footer>
 
