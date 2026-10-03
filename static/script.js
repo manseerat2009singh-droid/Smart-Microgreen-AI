@@ -1954,69 +1954,121 @@ document.addEventListener("DOMContentLoaded", () => {
         let stopped = false;
 
         async function runReplay() {
-            stopped = false;
-            image.classList.remove("loaded");
-            visual.classList.add("tm-scanning");
-            status.textContent = "PRELOADING DAY 1–9 CAPTURES...";
 
-            /* Pre-resolve URLs first so the replay NEVER advances into an unloaded image. */
-            const frames = [];
+    stopped = false;
 
-            for (const item of history) {
-                const day = Number(item.day);
-                const url = await findUsableImage(box, day);
+    image.classList.remove("loaded");
+    visual.classList.add("tm-scanning");
 
-                if (url) {
-                    const preload = new Image();
-                    await new Promise(resolve => {
-                        preload.onload = resolve;
-                        preload.onerror = resolve;
-                        preload.src = url;
-                    });
-                }
+    status.textContent = "LOADING EXPERIMENTAL CAPTURES...";
 
-                frames.push({
-                    day,
-                    url,
-                    vgi: Number(item.vgi || 0),
-                    green: Number(item.green || 0)
-                });
-            }
+    const frames = [];
 
-            status.textContent = "REPLAYING • ACTUAL EXPERIMENTAL CAPTURES";
+    /*
+     * Resolve all image URLs first.
+     * Then preload each image ONCE and keep the loaded
+     * Image object in memory for instant replay.
+     */
+    for (const item of history) {
 
-            for (let i = 0; i < frames.length; i++) {
-                if (stopped) return;
+        const day = Number(item.day);
 
-                const frame = frames[i];
-                label.textContent = `DAY ${frame.day}`;
-                dayLabel.textContent = `DAY ${frame.day}`;
-                vgi.textContent = frame.vgi.toFixed(1);
-                green.textContent = `${frame.green.toFixed(1)}%`;
-                progress.style.width = `${((i + 1) / frames.length) * 100}%`;
+        const url = await findUsableImage(box, day);
 
-                if (frame.url) {
-                    await waitForImage(frame.url, image);
-                } else {
-                    image.removeAttribute("src");
-                    image.classList.remove("loaded");
-                }
+        const frame = {
+            day,
+            url,
+            vgi: Number(item.vgi || 0),
+            green: Number(item.green || 0),
+            image: null
+        };
 
-                status.textContent =
-                    frame.url
-                        ? `DAY ${frame.day} • IMAGE CAPTURE LOADED • VGI ${frame.vgi.toFixed(1)}`
-                        : `DAY ${frame.day} • NO CAPTURE AVAILABLE`;
+        if (url) {
 
-                /* Hold each loaded frame long enough to actually see it. */
-                await new Promise(resolve => setTimeout(resolve, 1800));
-            }
+            const preload = new Image();
 
-            if (!stopped) {
-                visual.classList.remove("tm-scanning");
-                status.textContent =
-                    `REPLAY COMPLETE • BOX ${String(box).padStart(2, "0")} • DAY ${frames[frames.length - 1].day}`;
+            const loaded = await new Promise(resolve => {
+
+                preload.onload = () => resolve(true);
+                preload.onerror = () => resolve(false);
+
+                preload.src = url;
+            });
+
+            if (loaded) {
+                frame.image = preload;
             }
         }
+
+        frames.push(frame);
+    }
+
+    status.textContent =
+        "REPLAYING • ACTUAL EXPERIMENTAL CAPTURES";
+
+    for (let i = 0; i < frames.length; i++) {
+
+        if (stopped) return;
+
+        const frame = frames[i];
+
+        label.textContent =
+            `DAY ${frame.day}`;
+
+        dayLabel.textContent =
+            `DAY ${frame.day}`;
+
+        vgi.textContent =
+            frame.vgi.toFixed(1);
+
+        green.textContent =
+            `${frame.green.toFixed(1)}%`;
+
+        progress.style.width =
+            `${((i + 1) / frames.length) * 100}%`;
+
+        if (frame.image) {
+
+            image.classList.remove("loaded");
+
+            /*
+             * Use the already-loaded browser image.
+             * No second Render request.
+             */
+            image.src = frame.image.src;
+
+            requestAnimationFrame(() => {
+                image.classList.add("loaded");
+            });
+
+            status.textContent =
+                `DAY ${frame.day} • IMAGE CAPTURE LOADED • VGI ${frame.vgi.toFixed(1)}`;
+
+        } else {
+
+            image.removeAttribute("src");
+            image.classList.remove("loaded");
+
+            status.textContent =
+                `DAY ${frame.day} • NO CAPTURE AVAILABLE`;
+        }
+
+        /*
+         * Keep each frame visible.
+         */
+        await new Promise(resolve =>
+            setTimeout(resolve, 1800)
+        );
+    }
+
+    if (!stopped) {
+
+        visual.classList.remove("tm-scanning");
+
+        status.textContent =
+            `REPLAY COMPLETE • BOX ${String(box).padStart(2, "0")} • DAY ${frames[frames.length - 1].day}`;
+    }
+}
 
         modal.querySelector("#tmReplayAgain").onclick = runReplay;
 
