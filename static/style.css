@@ -6533,3 +6533,54 @@ box-shadow:
     }
 
 }
+
+/* ===== ANALYSIS MOBILE FIX ===== */
+
+@media (max-width: 600px) {
+
+    /* Prevent diagnostic panel from overflowing */
+    .analysis-result {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    /* Keep diagnostic content inside the phone */
+    .analysis-result > * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Diagnostic header */
+    .analysis-result::before {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    /* Prevent internal cards/metrics from becoming wider than screen */
+    .analysis-result .result-card,
+    .analysis-result .metric-card,
+    .analysis-result .analysis-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Box selection area */
+    .analysis-section select,
+    .analysis-section input,
+    .analysis-section .box-select,
+    .analysis-section .box-selector {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Buttons stay inside viewport */
+    .analysis-section button {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}
