@@ -1953,7 +1953,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let stopped = false;
 
-        async function runReplay() {
+async function runReplay() {
 
     stopped = false;
 
@@ -1962,46 +1962,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     status.textContent = "LOADING EXPERIMENTAL CAPTURES...";
 
-    const frames = [];
+    // Load ALL days simultaneously instead of one-by-one
+    const frames = await Promise.all(
+        history.map(async (item) => {
 
-    /*
-     * Resolve all image URLs first.
-     * Then preload each image ONCE and keep the loaded
-     * Image object in memory for instant replay.
-     */
-    for (const item of history) {
+            const day = Number(item.day);
+            const url = await findUsableImage(box, day);
 
-        const day = Number(item.day);
+            let loadedImage = null;
 
-        const url = await findUsableImage(box, day);
+            if (url) {
+                loadedImage = await new Promise(resolve => {
 
-        const frame = {
-            day,
-            url,
-            vgi: Number(item.vgi || 0),
-            green: Number(item.green || 0),
-            image: null
-        };
+                    const img = new Image();
 
-        if (url) {
+                    img.onload = () => resolve(img);
+                    img.onerror = () => resolve(null);
 
-            const preload = new Image();
-
-            const loaded = await new Promise(resolve => {
-
-                preload.onload = () => resolve(true);
-                preload.onerror = () => resolve(false);
-
-                preload.src = url;
-            });
-
-            if (loaded) {
-                frame.image = preload;
+                    img.src = url;
+                });
             }
-        }
 
-        frames.push(frame);
-    }
+            return {
+                day,
+                url,
+                image: loadedImage,
+                vgi: Number(item.vgi || 0),
+                green: Number(item.green || 0)
+            };
+        })
+    );
 
     status.textContent =
         "REPLAYING • ACTUAL EXPERIMENTAL CAPTURES";
@@ -2012,11 +2002,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const frame = frames[i];
 
-        label.textContent =
-            `DAY ${frame.day}`;
-
-        dayLabel.textContent =
-            `DAY ${frame.day}`;
+        label.textContent = `DAY ${frame.day}`;
+        dayLabel.textContent = `DAY ${frame.day}`;
 
         vgi.textContent =
             frame.vgi.toFixed(1);
@@ -2031,10 +2018,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             image.classList.remove("loaded");
 
-            /*
-             * Use the already-loaded browser image.
-             * No second Render request.
-             */
             image.src = frame.image.src;
 
             requestAnimationFrame(() => {
@@ -2053,9 +2036,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 `DAY ${frame.day} • NO CAPTURE AVAILABLE`;
         }
 
-        /*
-         * Keep each frame visible.
-         */
         await new Promise(resolve =>
             setTimeout(resolve, 1800)
         );
