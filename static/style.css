@@ -6047,3 +6047,489 @@ box-shadow:
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* =========================================================
+   MOBILE OPTIMIZATION — SMART MICROGREEN AI
+   Existing desktop design remains unchanged.
+   ========================================================= */
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 900px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .navbar {
+        padding: 14px 20px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .nav-links a {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    .dashboard-section,
+    .visual-section,
+    .feedback-section,
+    .team-section,
+    .analysis-section {
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .visual-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-snapshot {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .snapshot-tech {
+        flex-wrap: wrap;
+    }
+
+    .image-evidence-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lab-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .experiment-lab {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .bce-grid,
+    .bce-panels {
+        grid-template-columns: 1fr !important;
+    }
+
+}
+
+
+/* ---------- PHONE ---------- */
+
+@media (max-width: 600px) {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+
+    /* NAVBAR */
+
+    .navbar {
+        padding: 14px 14px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .logo {
+        justify-content: center;
+    }
+
+    .logo-title {
+        font-size: 13px;
+    }
+
+    .logo-subtitle {
+        font-size: 9px;
+    }
+
+    .logo-icon {
+        font-size: 22px;
+    }
+
+    .nav-links {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .nav-links a {
+        text-align: center;
+        padding: 9px 5px;
+        font-size: 11px;
+        border-radius: 7px;
+    }
+
+
+    /* SECTION HEADINGS */
+
+    .section-heading {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .section-heading h2 {
+        font-size: 28px;
+        line-height: 1.15;
+    }
+
+    .section-heading p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .section-tag {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
+
+
+    /* DASHBOARD */
+
+    .dashboard-section,
+    .visual-section,
+    .feedback-section,
+    .team-section,
+    .analysis-section {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        min-height: 75px;
+        padding: 16px;
+    }
+
+    .stat-card h3 {
+        font-size: 25px;
+    }
+
+    .stat-card p {
+        font-size: 11px;
+    }
+
+    .system-status {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .system-status span {
+        font-size: 9px;
+    }
+
+    .project-snapshot {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .project-snapshot h3 {
+        font-size: 19px;
+    }
+
+    .snapshot-tech {
+        gap: 6px;
+    }
+
+    .snapshot-tech span {
+        font-size: 9px;
+    }
+
+
+    /* CHARTS */
+
+    .visual-card {
+        width: 100%;
+        padding: 18px;
+        overflow: hidden;
+    }
+
+    .visual-card-header h3 {
+        font-size: 15px;
+    }
+
+    .visual-card canvas {
+        max-width: 100% !important;
+    }
+
+
+    /* ANALYSIS */
+
+    .analysis-container,
+    .analysis-card,
+    .analysis-panel {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .analysis-grid,
+    .analysis-layout,
+    .intel-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .box-selector,
+    .box-input,
+    .analysis-controls {
+        width: 100%;
+    }
+
+    .analysis-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .analysis-controls button,
+    .primary-btn {
+        width: 100%;
+        min-height: 44px;
+    }
+
+
+    /* IMAGE EVIDENCE */
+
+    .image-evidence-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .evidence-image-wrap {
+        height: 220px;
+    }
+
+    .day-buttons {
+        gap: 6px;
+    }
+
+    .day-button {
+        flex: 1 0 auto;
+        min-height: 40px;
+    }
+
+
+    /* EXPERIMENT LAB */
+
+    .experiment-lab {
+        margin: 45px 10px;
+        padding: 20px 14px;
+        border-radius: 20px;
+    }
+
+    .lab-grid {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 12px;
+        gap: 7px;
+    }
+
+    .lab-box {
+        min-height: 70px;
+    }
+
+    .lab-stage {
+        grid-template-columns: 1fr !important;
+    }
+
+
+    /* BOX COMPARISON */
+
+    .bce-day {
+        grid-template-columns: 42px 1fr 38px !important;
+        gap: 7px !important;
+        font-size: 10px !important;
+    }
+
+
+    /* FEEDBACK */
+
+    .feedback-container {
+        width: 100%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .form-group textarea {
+        min-height: 130px;
+    }
+
+    .feedback-live-panel,
+    .fic-section,
+    .feedback-wall {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fic-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+
+    /* FEEDBACK WALL */
+
+    .feedback-wall-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .feedback-wall-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+
+    /* TEAM */
+
+    .team-grid,
+    .team-container,
+    .team-cards {
+        grid-template-columns: 1fr !important;
+    }
+
+
+    /* FULLSCREEN IMAGE */
+
+    .image-viewer-backdrop {
+        padding: 12px;
+    }
+
+    .image-viewer-image {
+        max-width: 96%;
+        max-height: 82%;
+    }
+
+    .image-viewer-close {
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+    }
+
+
+    /* SELECTED BOX TIME MACHINE */
+
+    .tm-shell {
+        width: calc(100% - 20px) !important;
+        max-width: none !important;
+        margin: 10px auto !important;
+    }
+
+    .tm-top {
+        gap: 10px;
+    }
+
+    .tm-title {
+        font-size: 24px !important;
+    }
+
+    .tm-subtitle {
+        font-size: 11px !important;
+    }
+
+    .tm-visual {
+        min-height: 220px !important;
+    }
+
+    .tm-data {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .tm-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tm-play {
+        width: 100%;
+        min-height: 44px;
+    }
+
+
+    /* BUTTONS */
+
+    button,
+    .primary-btn,
+    .secondary-btn {
+        min-height: 42px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        padding: 35px 18px;
+        text-align: center;
+    }
+
+    footer p {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+}
+
+
+/* ---------- VERY SMALL PHONES ---------- */
+
+@media (max-width: 380px) {
+
+    .nav-links {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 24px;
+    }
+
+    .lab-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .lab-box {
+        min-height: 62px;
+        font-size: 10px;
+    }
+
+    .evidence-image-wrap {
+        height: 190px;
+    }
+
+}
